@@ -42,6 +42,7 @@ import uk.ac.uwl.procrado.model.ToDo;
 import uk.ac.uwl.procrado.repository.ToDoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/todos")
@@ -55,10 +56,29 @@ public class ToDoController {
         return ResponseEntity.ok(todos);
     }
 
+//    @PutMapping("/{id}")
+//    public ResponseEntity<?> updateTodo(@PathVariable Long id, @RequestBody ToDo todo) {
+//        ToDo updatedTodo = todoRepository.save(todo);
+//        return ResponseEntity.ok(updatedTodo);
+//    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateTodo(@PathVariable Long id, @RequestBody ToDo todo) {
-        ToDo updatedTodo = todoRepository.save(todo);
-        return ResponseEntity.ok(updatedTodo);
+    public ResponseEntity<?> updateTodo(@PathVariable Long id, @RequestBody ToDo updatedTodo) {
+        Optional<ToDo> todoOptional = todoRepository.findById(id);
+        if (todoOptional.isPresent()) {
+            ToDo existingTodo = todoOptional.get();
+            existingTodo.settask(updatedTodo.gettask());
+            existingTodo.setDescription(updatedTodo.getDescription());
+            existingTodo.setDateCreated(updatedTodo.getDateCreated());
+            existingTodo.setDueDate(updatedTodo.getDueDate());
+            existingTodo.setTaskCompleted(updatedTodo.getTaskCompleted());
+            existingTodo.setTaskCancelled(updatedTodo.getTaskCancelled());
+            existingTodo.setisFavourite(updatedTodo.isFavourite());
+            todoRepository.save(existingTodo);
+            return ResponseEntity.ok(existingTodo);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
