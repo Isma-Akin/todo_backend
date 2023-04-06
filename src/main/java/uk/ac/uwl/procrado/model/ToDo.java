@@ -2,10 +2,7 @@ package uk.ac.uwl.procrado.model;
 
 //import org.apache.catalina.User;
 import jakarta.persistence.*;
-import uk.ac.uwl.procrado.model.BaseEntity;
-import uk.ac.uwl.procrado.model.User;
 
-import javax.annotation.processing.Generated;
 import java.util.Date;
 
 @Entity
@@ -28,80 +25,82 @@ public class ToDo extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
 
     public boolean istaskCompleted() {
         return taskCompleted;
     }
-
-    public void settaskCompleted(boolean taskCompleted) {
-        this.taskCompleted = taskCompleted;
-    }
-
     public boolean istaskCancelled() {
         return taskCancelled;
     }
-
-    public void settaskCancelled(boolean taskCancelled) {
-        this.taskCancelled = taskCancelled;
-    }
-
     public boolean isFavourite() {
         return isFavourite;
     }
+//    public boolean isTaskCompleted() {
+//        return taskCompleted;
+//    }
+//    public boolean isTaskCancelled() {
+//        return taskCancelled;
+//    }
 
+    public void setTaskCompleted(boolean taskCompleted) {
+        this.taskCompleted = taskCompleted;
+    }
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+//    public void settaskCancelled(boolean taskCancelled) {
+//        this.taskCancelled = taskCancelled;
+//    }
     public void setisFavourite(boolean favourite) {
         isFavourite = favourite;
     }
-
-    public ToDo() {
-
+//    public void setTaskCompleted(boolean taskCompleted) {
+//        this.taskCompleted = taskCompleted;
+//    }
+    public void setTaskCancelled(boolean taskCancelled) {
+        this.taskCancelled = taskCancelled;
     }
-
-    public Long getId() {
-        return id;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    public ToDo(Long id) {
-        this.id = id;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-    public String gettask() {
-        return task;
-    }
-
     public void settask(String task) {
         this.task = task;
     }
 
+
+    public boolean getTaskCompleted() { return taskCompleted; }
+    public boolean getTaskCancelled() { return taskCancelled; }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+    public Date getDueDate() {
+        return dueDate;
+    }
+    public String gettask() {
+        return task;
+    }
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public User getUser() {
         return user;
     }
+    public Long getId() {
+        return id;
+    }
+    public ToDo() {
 
-    public void setUser(User user) {
-        this.user = user;
+    }
+
+    public ToDo(Long id) {
+        this.id = id;
     }
 
     public ToDo(String task, String description, User user) {
