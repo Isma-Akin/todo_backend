@@ -24,14 +24,6 @@ public class BootStrap implements CommandLineRunner {
         logger.info("------Bootstrap loaded------");
         logger.info("----------------------------");
 
-
-//        User user1 = new User();
-//        User user2 = new User();
-        ToDo toDo = new ToDo();
-        ToDo toDo2 = new ToDo();
-
-        toDoRepository.save(toDo);
-        toDoRepository.save(toDo2);
         logger.info(String.valueOf(toDoRepository.count()));
     }
 }
